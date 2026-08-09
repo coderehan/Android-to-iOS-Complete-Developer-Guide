@@ -1,21 +1,21 @@
 # 22 - Push Notifications: FCM (Android) vs APNs (iOS)
 
-> Firebase Cloud Messaging works on both platforms, but under the hood it routes through different native push services â€” FCM directly on Android, and through Apple's APNs on iOS. Understanding APNs is essential even if you use Firebase as your abstraction layer.
+> Firebase Cloud Messaging works on both platforms, but under the hood it routes through different native push services — FCM directly on Android, and through Apple's APNs on iOS. Understanding APNs is essential even if you use Firebase as your abstraction layer.
 
 ---
 
-## ðŸ”‘ Core Philosophy
+## 🔑 Core Philosophy
 
 | Android | iOS |
 |---|---|
-| FCM talks directly to the device | FCM (if used) is a wrapper over **APNs** â€” Apple's own push service |
+| FCM talks directly to the device | FCM (if used) is a wrapper over **APNs** — Apple's own push service |
 | No special provisioning needed | Requires an APNs certificate/key + Push Notifications capability in Xcode |
 | `FirebaseMessagingService` | `UNUserNotificationCenterDelegate` + `AppDelegate` hooks |
-| Notification channels (Android 8+) | No channels â€” categories serve a related but different purpose |
+| Notification channels (Android 8+) | No channels — categories serve a related but different purpose |
 
 ---
 
-## ðŸ“² Receiving a Push Notification
+## 📲 Receiving a Push Notification
 
 **Android (FirebaseMessagingService)**
 ```kotlin
@@ -45,7 +45,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 }
 ```
 
-SwiftUI apps still need a small `AppDelegate` bridge (via `@UIApplicationDelegateAdaptor`) for push notification setup â€” there's no pure-SwiftUI way to handle APNs registration.
+SwiftUI apps still need a small `AppDelegate` bridge (via `@UIApplicationDelegateAdaptor`) for push notification setup — there's no pure-SwiftUI way to handle APNs registration.
 
 ```swift
 @main
@@ -60,11 +60,11 @@ struct MyApp: App {
 
 ---
 
-## ðŸ”” Requesting Permission & Registering
+## 🔔 Requesting Permission & Registering
 
 **Android (13+, runtime permission)**
 ```kotlin
-// See 19-Permissions.md â€” POST_NOTIFICATIONS
+// See 19-Permissions.md — POST_NOTIFICATIONS
 FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
     // send to backend
 }
@@ -81,13 +81,13 @@ UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound
 }
 ```
 
-iOS requires **two steps**: requesting notification permission from the user AND explicitly calling `registerForRemoteNotifications()` to obtain a device token from APNs â€” Android's flow is more unified through the FCM SDK.
+iOS requires **two steps**: requesting notification permission from the user AND explicitly calling `registerForRemoteNotifications()` to obtain a device token from APNs — Android's flow is more unified through the FCM SDK.
 
 ---
 
-## ðŸ· Notification Channels vs Categories
+## 🏷 Notification Channels vs Categories
 
-**Android** â€” Channels group notifications by type and let users control importance/sound per channel:
+**Android** — Channels group notifications by type and let users control importance/sound per channel:
 ```kotlin
 val channel = NotificationChannel(
     "messages", "Messages", NotificationManager.IMPORTANCE_HIGH
@@ -95,7 +95,7 @@ val channel = NotificationChannel(
 notificationManager.createNotificationChannel(channel)
 ```
 
-**iOS** â€” No direct equivalent for user-configurable grouping. The closest concept is **Notification Categories**, which define available *actions* (buttons) on a notification, not user-facing importance settings:
+**iOS** — No direct equivalent for user-configurable grouping. The closest concept is **Notification Categories**, which define available *actions* (buttons) on a notification, not user-facing importance settings:
 ```swift
 let category = UNNotificationCategory(
     identifier: "MESSAGE_CATEGORY",
@@ -105,11 +105,11 @@ let category = UNNotificationCategory(
 UNUserNotificationCenter.current().setNotificationCategories([category])
 ```
 
-> âš ï¸ This is a real gap, not just a naming difference: Android users can mute/adjust specific channels (e.g. "Promotions" vs "Order Updates") right from system settings. iOS gives users only one blanket on/off toggle per app (with sub-toggles for alert style, sound, badge) â€” there's no per-topic granularity unless you build it yourself in-app.
+> ⚠️ This is a real gap, not just a naming difference: Android users can mute/adjust specific channels (e.g. "Promotions" vs "Order Updates") right from system settings. iOS gives users only one blanket on/off toggle per app (with sub-toggles for alert style, sound, badge) — there's no per-topic granularity unless you build it yourself in-app.
 
 ---
 
-## ðŸŽ¯ Foreground vs Background Handling
+## 🎯 Foreground vs Background Handling
 
 | Android | iOS |
 |---|---|
@@ -118,7 +118,7 @@ UNUserNotificationCenter.current().setNotificationCategories([category])
 
 ---
 
-## ðŸ“ Quick Reference Table
+## 📝 Quick Reference Table
 
 | Concept | Android (FCM) | iOS (APNs / Firebase) |
 |---|---|---|
@@ -126,9 +126,7 @@ UNUserNotificationCenter.current().setNotificationCategories([category])
 | Token registration | Automatic via FCM SDK | Two-step: permission + `registerForRemoteNotifications()` |
 | Grouping/importance | Notification Channels | Not directly supported (single toggle) |
 | Action buttons | `NotificationCompat.Action` | `UNNotificationCategory` + `UNNotificationAction` |
-| Required Xcode capability | â€” | Push Notifications capability + APNs key/cert |
+| Required Xcode capability | — | Push Notifications capability + APNs key/cert |
 | SwiftUI-only integration | N/A | Requires `@UIApplicationDelegateAdaptor` bridge |
 
 ---
-**Next:** [23 - Background Tasks â†’](./23-Background-Tasks.md)
-
