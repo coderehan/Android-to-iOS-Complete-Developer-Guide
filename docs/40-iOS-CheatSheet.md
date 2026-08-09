@@ -130,13 +130,5 @@
 
 ---
 
-## 🧭 Where to Go Deeper
-
-Every row above links back to a full explanation with code samples:
-
-[01-Language](./01-Programming-Language.md) · [02-IDE](./02-IDE.md) · [03-Structure](./03-Project-Structure.md) · [04-Build](./04-Build-System.md) · [05-UI](./05-UI.md) · [06-Layouts](./06-Layouts.md) · [07-Components](./07-Components.md) · [08-Navigation](./08-Navigation.md) · [09-State](./09-State-Management.md) · [10-Lifecycle](./10-Lifecycle.md) · [11-Networking](./11-Networking.md) · [12-JSON](./12-JSON-Parsing.md) · [13-Images](./13-Image-Loading.md) · [14-LocalStorage](./14-Local-Storage.md) · [15-Database](./15-Database.md) · [16-DI](./16-Dependency-Injection.md) · [17-Architecture](./17-Architecture.md) · [18-Auth](./18-Authentication.md) · [19-Permissions](./19-Permissions.md) · [20-Camera](./20-Camera.md) · [21-Maps](./21-Maps.md) · [22-Push](./22-Push-Notifications.md) · [23-Background](./23-Background-Tasks.md) · [24-Animations](./24-Animations.md) · [25-Performance](./25-Performance.md) · [26-Testing](./26-Testing.md) · [27-Debugging](./27-Debugging.md) · [28-CI/CD](./28-CI-CD.md) · [29-Release](./29-Build-and-Release.md) · [30-Libraries](./30-Best-Libraries.md) · [31-Interview](./31-Interview-Questions.md) · [32-EnvVars](./32-Environment-Variables.md) · [33-Config](./33-Configuration.md) · [34-DeepLinking](./34-Deep-Linking.md) · [35-Offline](./35-Offline-First.md) · [36-Files](./36-File-Handling.md) · [37-DepMgmt](./37-Dependency-Management.md) · [38-Example](./38-Project-Architecture-Example.md) · [39-Commands](./39-Useful-Commands.md) · [40-Resources](./40-Resources.md)
-
----
-
 🎉 **That's the full guide.** If you know Android deeply, you now have every mapping needed to ramp up on iOS fast. Happy building!
 
