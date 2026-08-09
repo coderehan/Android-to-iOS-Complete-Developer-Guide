@@ -89,8 +89,7 @@ iOS-For-Android-Developers/
 │   ├── 37-Dependency-Management.md
 │   ├── 38-Project-Architecture-Example.md
 │   ├── 39-Useful-Commands.md
-│   ├── 40-Resources.md
-│   └── 41-iOS-CheatSheet.md
+│   └── 40-iOS-CheatSheet.md
 ```
 
 ---
